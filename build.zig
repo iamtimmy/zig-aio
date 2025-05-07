@@ -39,7 +39,7 @@ pub fn build(b: *std.Build) void {
         .target = target,
         .optimize = optimize,
         .link_libc = switch (target.query.os_tag orelse builtin.os.tag) {
-            .windows => true,
+            .windows => false,
             .freebsd, .openbsd, .dragonfly, .netbsd => true,
             else => false,
         },
