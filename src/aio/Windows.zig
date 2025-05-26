@@ -531,8 +531,8 @@ pub fn uringlator_complete(self: *@This(), id: aio.Id, op_type: Operation, failu
                 }
             },
             .read, .readv, .recv, .recv_msg => {
-                const out_read = self.uringlator.ops.getOne(.out_result, id).cast(*usize);
-                out_read.* = ovl.res;
+                const out_read = self.uringlator.ops.getOne(.out_result, id).cast(?*usize);
+                if (out_read) |r| r.* = ovl.res;
             },
             .write, .writev, .send, .send_msg => {
                 const out_written = self.uringlator.ops.getOne(.out_result, id).cast(?*usize);
