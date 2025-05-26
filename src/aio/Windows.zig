@@ -127,7 +127,7 @@ fn poll(self: *@This(), mode: aio.CompletionMode, wait_time: u32, comptime safet
         .blocking => wait_time,
         .nonblocking => 0,
     });
-    if (res != 1 and maybe_ovl == null) return;
+    if (res != 1 or maybe_ovl == null) return;
 
     const id: aio.Id = switch (key.type) {
         .nop => {
